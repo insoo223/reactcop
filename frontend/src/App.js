@@ -7,7 +7,9 @@ function App() {
     useEffect ( () => {
         const fetchUsers = async () => {
             try {
-                const res = await axios.get ('http://192.168.0.64:5000/api/users');
+                //const res = await axios.get ('http://localhost:5000/api/users');
+                const res = await axios.get ('http://172.30.1.95:5000/api/users');
+                //const res = await axios.get ('http://192.168.0.64:5000/api/users');
                 setUsers(res.data);
             } catch (err) {
                 console.log ('Error fetching users: ', err);
