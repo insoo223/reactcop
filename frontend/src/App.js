@@ -3,11 +3,16 @@ import axios from 'axios';
 
 function App() {
     const [users, setUsers] = useState([]);
-
+    const MGURI = 'https://c269-118-35-64-189.ngrok-free.app';
     useEffect ( () => {
         const fetchUsers = async () => {
             try {
-                const res = await axios.get ('https://6692-118-35-64-189.ngrok-free.app/api/users');
+                console.log ('Insoo Backend Mongo URI: ');
+                console.log (`${MGURI}/api/users`);
+                const res = await axios.get (`${MGURI}/api/users`)
+                        .then(response => console.log(response.data))
+                        .catch(error => console.error(error));
+
                 //const res = await axios.get ('http://localhost:5000/api/users');
                 //const res = await axios.get ('http://172.30.1.95:5000/api/users');
                 //const res = await axios.get ('http://192.168.0.64:5000/api/users');
@@ -24,7 +29,7 @@ function App() {
     <div> 
         <h1>User List</h1>
         <ul>
-            {users.map (user => (
+            { Array.isArray(users) && users.map (user => (
                 <li key={user._id}>
                     {user.name}, {user.email}
                 </li>
