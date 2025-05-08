@@ -1,0 +1,13 @@
+version: "2"  # Specify the version
+
+authtoken: 2w7SujIjLf1flPUFdbT3tRRr0IP_BSHq6qH4UKDoy72YPfJH
+
+tunnels:
+  frontend:
+    proto: http
+    addr: 3000
+  backend:
+    proto: http
+    addr: 5000
+    host_header: rewrite
+
