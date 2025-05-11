@@ -17,8 +17,8 @@ function App() {
 
   const handleSearch = async () => {
     try {
-      //const response = await axios.get(`${MGURI}/users`, { 
-      const response = await axios.get(`${MGURI}/`, { 
+      const response = await axios.get(`${MGURI}/users`, { 
+      //const response = await axios.get(`${MGURI}/`, { 
 		params: { name: searchName },  
 		headers: { "ngrok-skip-browser-warning": "true" }  
 	});
@@ -36,8 +36,8 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      //const response = await axios.put(`${MGURI}/users/${user._id}`, 
-      const response = await axios.put(`${MGURI}/${user._id}`, 
+      const response = await axios.put(`${MGURI}/users/${user._id}`, 
+      //const response = await axios.put(`${MGURI}/${user._id}`, 
 		user, 
 		{ headers: { "ngrok-skip-browser-warning": "true" } 
 	});

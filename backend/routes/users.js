@@ -3,9 +3,12 @@ const router = express.Router();
 const User = require("../models/User");
 
 // Find user by name
-router.get("/", async (req, res) => {
+//router.get("/", async (req, res) => {
+router.get("/users/", async (req, res) => {
   try {
-    const user = await User.findOne({ name: req.query.name });
+    const nameQuery = req.query.name;
+    //const user = await User.findOne({ name: nameQuery });
+    const user = await User.findOne({ name: { $regex: nameQuery, $options: "i" } }); // Case-insensitive partial search
     if (!user) return res.status(404).json({ error: "User not found" });
     res.json(user);
   } catch (error) {
@@ -14,7 +17,8 @@ router.get("/", async (req, res) => {
 });
 
 // Update user by ID
-router.put("/:id", async (req, res) => {
+//router.put("/:id", async (req, res) => {
+router.put("/users/:id", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(updatedUser);
