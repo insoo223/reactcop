@@ -4,6 +4,7 @@ const router = express.Router();
 
 //Get all users
 router.get ('/', async (req, res) => {
+//router.get ('/api/users', async (req, res) => {
     try {
         const users = await User.find();
         res.json(users);

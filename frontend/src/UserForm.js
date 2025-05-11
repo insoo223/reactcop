@@ -1,8 +1,15 @@
+/*
+  File: UserForm.js
+  Purpose: Find, Display and Edit user info in MERN.
+  Author: Insoo Kim (insoo@hotmail.com)
+  Created: Sun. May 11, 2025
+  Upated: 
+*/
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 //import dotenv from 'dotenv';
 
-function App() {
+function UserForm() {
     const [users, setUsers] = useState([]);
     const MGURI = 'https://d991-118-35-64-189.ngrok-free.app';
     useEffect ( () => {
