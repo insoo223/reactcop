@@ -7,40 +7,60 @@
 */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-//import dotenv from 'dotenv';
 
 function UserForm() {
-    const [users, setUsers] = useState([]);
-    const MGURI = 'https://d991-118-35-64-189.ngrok-free.app';
-    useEffect ( () => {
-        const fetchUsers = async () => {
-            try {
-                const res = await axios.get(`${MGURI}/api/users`, { headers: { "ngrok-skip-browser-warning": "true" } });
+  const [user, setUser] = useState({ name: "", email: "" , mobile: ""});
+  const [userId, setUserId] = useState("");
+  const MGURI = 'https://2d84-118-39-108-176.ngrok-free.app';
 
-                //const res = await axios.get ('http://localhost:5000/api/users');
-                //const res = await axios.get ('http://172.30.1.95:5000/api/users');
-                //const res = await axios.get ('http://192.168.0.64:5000/api/users');
-                setUsers(res.data);
-            } catch (err) {
-                console.log ('Error fetching users: ', err);
-            }
-        };
+  const handleSearch = () => {
+    fetch(`{$MGURI}/users/${userId}`)
+      .then((res) => res.json())
+      .then((data) => setUser(data))
+      .catch((error) => console.error("Error fetching user:", error));
+  };
 
-        fetchUsers();
-    }, []);
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch(`{$MGURI}/users/${userId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => setUser(data))
+      .catch((error) => console.error("Error updating user:", error));
+  };
 
   return (
-    <div> 
-        <h1>User List</h1>
-        <ul>
-            { users.map (user => (
-                <li key={user._id}>
-                    {user.name}, {user.email}
-                </li>
-            ))}
-        </ul>
+    <div>
+      <h2>Find and Edit User</h2>
+      <input type="text" placeholder="Enter user ID" value={userId} onChange={(e) => setUserId(e.target.value)} />
+      <button onClick={handleSearch}>Find User</button>
+
+      {user.name && (
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="name" value={user.name} onChange={handleChange} placeholder="Name" />
+          <input type="email" name="email" value={user.email} onChange={handleChange} placeholder="Email" />
+          <input type="text" name="mobile" value={user.mobile} onChange={handleChange} placeholder="Mobile" />
+          <button type="submit">Save</button>
+        </form>
+      )}
+
+      {user.name && (
+        <div>
+          <h3>Displaying User Info:</h3>
+          <p>Name: {user.name}</p>
+          <p>Email: {user.email}</p>
+          <p>Mobile: {user.mobile}</p>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;
