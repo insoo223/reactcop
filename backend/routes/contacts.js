@@ -8,11 +8,12 @@ router.get("/contacts/", async (req, res) => {
   try {
     const nameQuery = req.query.name;
     //const contact = await Contact.findOne({ name: nameQuery });
-    const contact = await Contact.findOne({ name: { $regex: nameQuery, $options: "i" } }); // Case-insensitive partial search
-    if (!contact) return res.status(404).json({ error: "Contact not found" });
-    res.json(contact);
+    //const contact = await Contact.findOne({ name: { $regex: nameQuery, $options: "i" } }); // Case-insensitive partial search
+    const contacts = await Contact.find({ name: { $regex: nameQuery, $options: "i" } }); // Case-insensitive partial search
+    if (!contacts.length) return res.status(404).json({ error: "No matching contacts found" });
+    res.json(contacts);
   } catch (error) {
-    res.status(500).json({ error: "Error fetching contact" });
+    res.status(500).json({ error: "Error fetching contacts" });
   }
 });
 
