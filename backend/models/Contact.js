@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const userSchema = new mongoose.Schema ({
+const contactSchema = new mongoose.Schema ({
     name: {type: String, required: true},
     mobile: {type: String, required: false},
     o_tel: {type: String, required: false},
@@ -9,5 +9,5 @@ const userSchema = new mongoose.Schema ({
     regdate: {type: Date, required: true},
    });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Contact', contactSchema);
  
