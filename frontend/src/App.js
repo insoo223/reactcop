@@ -30,32 +30,43 @@ function App() {
   return (
     <div>
       <h2>Find & Display Contacts</h2>
-      <input 
-        type="text" 
-        placeholder="Enter name" 
-        value={searchName} 
-        onChange={(e) => setSearchName(e.target.value)} 
+      <input
+        type="text"
+        placeholder="Enter name"
+        value={searchName}
+        onChange={(e) => setSearchName(e.target.value)}
       />
       <button onClick={handleSearch}>Find Contacts</button>
 
       {contacts.length > 0 && (
         <div>
           <h3>Displaying Contact List:</h3>
-          {contacts.map((contact) => (
-            <div key={contact._id}>
-              <p><strong>Name:</strong> {contact.name}</p>
-              <p><strong>Email:</strong> {contact.email}</p>
-              <p><strong>Mobile:</strong> {contact.mobile}</p>
-              <p><strong>Cate:</strong> {contact.cate}</p>
-              <p>
-                <strong>Update:</strong> 
-                {contact.update && !isNaN(new Date(contact.update).getTime()) 
-                  ? new Date(contact.update).toISOString().split('T')[0] 
-                  : "Invalid date"}
-              </p>
-              <hr />
-            </div>
-          ))}
+          <table border="1" style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Cate</th>
+                <th>Update</th>
+              </tr>
+            </thead>
+            <tbody>
+              {contacts.map((contact) => (
+                <tr key={contact._id}>
+                  <td>{contact.name}</td>
+                  <td>{contact.email}</td>
+                  <td>{contact.mobile}</td>
+                  <td>{contact.cate}</td>
+                  <td>
+                    {contact.update && !isNaN(new Date(contact.update).getTime())
+                      ? new Date(contact.update).toISOString().split('T')[0]
+                      : "Invalid date"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
