@@ -1,12 +1,12 @@
 version: "3"
 services:
   backend:
-    build: ./backend
+    image: insoo223/contacts_back:name
     ports:
       - "5000:5000"
     
   frontend:
-    build: ./frontend
+    image: insoo223/contacts_front:name
     ports:
       - "3000:3000"
     depends_on:
