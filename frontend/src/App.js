@@ -13,7 +13,7 @@ function App() {
   const [searchName, setSearchName] = useState("");
   const [contacts, setContacts] = useState([]); // Change to an array
 
-  const MGURI = 'https://f31f-118-35-64-189.ngrok-free.app';
+  const MGURI = 'https://0010-118-35-64-189.ngrok-free.app';
 
   const handleSearch = async () => {
     try {
