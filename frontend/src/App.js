@@ -2,7 +2,7 @@
   File: ContactForm.js
   Purpose: Find, Display and Edit contact info in MERN.
   Author: Insoo Kim (insoo@hotmail.com)
-  Created: Mon. May 12, 2025
+  Created: Wed. May 14, 2025
   Upated:
 */
 
@@ -13,7 +13,8 @@ function App() {
   const [searchName, setSearchName] = useState("");
   const [contacts, setContacts] = useState([]); // Change to an array
 
-  const MGURI = 'https://0010-118-35-64-189.ngrok-free.app';
+  //backend DB URI
+  const MGURI = process.env.REACT_APP_MGURI;
 
   const handleSearch = async () => {
     try {
