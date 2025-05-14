@@ -10,6 +10,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     image: insoo223/contacts_front:name
+    environment:
+      - REACT_APP_MGURI=https://05c9-118-39-108-176.ngrok-free.app
     ports:
       - "3000:3000"
     depends_on:
