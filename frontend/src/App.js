@@ -1,69 +1,19 @@
 /*
-  File: ContactForm.js
+  File: ContactForm.js (App.js)
   Purpose: Find, Display and Edit contact info in MERN.
   Author: Insoo Kim (insoo@hotmail.com)
   Created: Mon. May 12, 2025
-  Upated: Wed. May 14, 2025
+  Upated: Thu. May 15, 2025
 */
 
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import SearchInput from "./SearchInput";
+import ContactTable from "./ContactTable";
 
 // Environment Variables
 const MGURI = process.env.REACT_APP_MGURI;
 
-// Search Input Component
-const SearchInput = ({ searchName, setSearchName, handleSearch }) => (
-  <div>
-    <h2>Find & Display Contacts</h2>
-    <input
-      type="text"
-      placeholder="Enter name"
-      value={searchName}
-      onChange={(e) => setSearchName(e.target.value)}
-    />
-    <button onClick={handleSearch}>Find Contacts</button>
-  </div>
-);
-
-// Contact Table Component
-const ContactTable = ({ contacts }) => (
-  contacts.length > 0 && (
-    <div>
-      <h3>Displaying Contact List:</h3>
-      <table border="1" style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>O_Tel</th>
-            <th>Cate</th>
-            <th>Update</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contacts.map((contact) => (
-            <tr key={contact._id}>
-              <td>{contact.name}</td>
-              <td>{contact.email}</td>
-              <td>{contact.mobile}</td>
-              <td>{contact.o_tel}</td>
-              <td>{contact.cate}</td>
-              <td>
-                {contact.update && !isNaN(new Date(contact.update).getTime())
-                  ? new Date(contact.update).toISOString().split('T')[0]
-                  : "Invalid date"}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-);
-
-// Main Component
 const App = () => {
   const [searchName, setSearchName] = useState("");
   const [contacts, setContacts] = useState([]);
@@ -72,7 +22,7 @@ const App = () => {
     try {
       const response = await axios.get(`${MGURI}/contacts`, {
         params: { name: searchName },
-        headers: { "ngrok-skip-browser-warning": "true" }
+        headers: { "ngrok-skip-browser-warning": "true" },
       });
       setContacts(response.data);
     } catch (error) {
