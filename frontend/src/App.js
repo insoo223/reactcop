@@ -6,17 +6,27 @@
   Upated: Thu. May 15, 2025
 */
 
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+//import React, { useState } from "react";
+//import axios from "axios";
+
+/*---
 import SearchInput from "./SearchInput";
 import ContactTable from "./ContactTable";
+---*/
+import KeywdInput from "./KeywdInput";
 
 // Environment Variables
-const MGURI = process.env.REACT_APP_MGURI;
+//const MGURI = process.env.REACT_APP_MGURI;
 
 const App = () => {
+  /*---
   const [searchName, setSearchName] = useState("");
   const [contacts, setContacts] = useState([]);
+
+  const [subj, setSubj] = useState("");
+  const [body, setBody] = useState("");
+  const [keywd, setKeywd] = useState("");
 
   const handleSearch = async () => {
     try {
@@ -29,11 +39,19 @@ const App = () => {
       console.error("Error fetching contacts:", error);
     }
   };
+  ---*/
 
   return (
     <div>
+      {/*
       <SearchInput searchName={searchName} setSearchName={setSearchName} handleSearch={handleSearch} />
       <ContactTable contacts={contacts} />
+      <input type="text" value={subj} onChange={(e) => setSubj(e.target.value)} placeholder="Subject" />
+      <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="Body"></textarea>
+      <KeywordInput keywd={keywd} setKeywd={setKeywd} />
+      */}
+      <KeywdInput />
+
     </div>
   );
 };
