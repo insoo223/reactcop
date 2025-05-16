@@ -8,22 +8,32 @@
 
 const express = require("express");
 const router = express.Router();
-const Know = require("../models/Know");
+const Keywd = require("../models/Keywd");
 
+// API Endpoint to Get Matching Keywords
 // Find keywds by type-in word
-router.get("/knows/keywds", async (req, res) => {
-    const keywdQuery = req.query.keywd || "";
-    const keywds = await Know.find({ keywd: { $regex: keywdQuery, $options: "i" } }).distinct("keywd"); // Case-insensitive partial search
+//router.get("/keywds", async (req, res) => {
+  router.get("/", async (req, res) => {
+  try {
+    const keywdQuery = req.query.word || "";
+    const keywds = await Keywd.find({ word: { $regex: keywdQuery, $options: "i" } }).select("word"); // Case-insensitive partial search
+    console.log("Backend response:", keywds); // Debugging line
     res.json(keywds);
+  } catch (error) {
+    console.error("Error retrieving keywords:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
+// API Endpoint to Add a New Keyword
 // Add keywd 
-router.post("/knows/keywds", async (req, res) => {
+//router.post("/keywds", async (req, res) => {
+  router.post("/", async (req, res) => {
   try {
-    const { keywd } = req.body;
-    const newKnow = new Know({ keywd });
-    await newKnow.save();
-    res.json({ message: "Keyword added", keywd });
+    const { word } = req.body;
+    const newKeywd = new Keywd({ word, created: new Date(), updated: new Date() });
+    await newKeywd.save();
+    res.json({ message: "Keyword added", keyword: newKeywd });
   } catch (error) {
     res.status(500).json({ error: "Error updating keywd" });
   }
